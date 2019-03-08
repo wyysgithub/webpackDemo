@@ -1,6 +1,7 @@
 // 开发环境
 
 // const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: __dirname + '/app/main.js',
@@ -86,5 +87,13 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+
+
+    /**
+     *
+     */
+    plugins: [
+        new webpack.BannerPlugin("版权所有 WangYangYang") // 打包出的js首行注释版权信息
+    ]
 }
