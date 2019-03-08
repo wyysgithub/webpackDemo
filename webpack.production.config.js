@@ -14,6 +14,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // npm install --save-dev uglifyjs-webpack-plugin
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// npm install clean-webpack-plugin --save-dev 去除build文件中的残余文件  https://github.com/johnagan/clean-webpack-plugin
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: __dirname + "/app/main.js",
@@ -58,7 +60,12 @@ module.exports = {
         // new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(), //为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
         // new webpack.optimize.UglifyJsPlugin(),   用于压缩JS代码  4.* 版本UglifyJsPlugin，替换成了optimization.minimize
-        new ExtractTextPlugin("style.css") //分离CSS和JS文件
+        new ExtractTextPlugin("style.css"), //分离CSS和JS文件
+        /**
+         * 新版本参考
+         *  https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional
+         */
+        new CleanWebpackPlugin()
     ],
     optimization: {
         minimizer: [
