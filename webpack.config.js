@@ -77,8 +77,11 @@ module.exports = {
                         loader: "css-loader",
                         options: {
                             modules : true, //启用css nodules
-                            localIdentName:'[name]__[local]--[hash:base64:5]' //指定css的类名格式
+                            // localIdentName:'[name]__[local]--[hash:base64:5]' //指定css的类名格式   Greeter__root--16xre
                         }
+                    },
+                    {
+                        loader: "postcss-loader"  // 生成的类名 _16xre3sc5AxHpoaZlFB-tH
                     }
                 ]
             }
