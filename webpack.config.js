@@ -27,9 +27,11 @@ module.exports = {
      *
      */
     devServer: {
-        contentBase: "./public",//本地服务器所加载的页面所在的目录
+        contentBase: "./build",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转
-        inline: true//实时刷新
+        inline: true,//实时刷新
+
+        hot:true //热部署（实时更新页面）
     },
 
     /**
@@ -104,6 +106,19 @@ module.exports = {
         new webpack.BannerPlugin("版权所有 WangYangYang"), // 打包出的js首行注释版权信息
         new HtmlWebpackPlugin({
             template:__dirname+"/app/index.tmpl.html"  //new 示例并传入参数
-        })
+        }),
+
+        /**
+         *
+         * Babel和webpack是独立的工具
+         * 二者可以一起工作
+         * 二者都可以通过插件拓展功能
+         * HMR是一个webpack插件，它让你能浏览器中实时观察模块修改后的效果，但是如果你想让它工作，需要对模块进行额外的配额；
+         * Babel有一个叫做react-transform-hrm的插件，可以在不对React模块进行额外的配置的前提下让HMR正常工作；
+         *
+         * npm install --save-dev babel-plugin-react-transform react-transform-hmr
+         *
+         */
+        new webpack.HotModuleReplacementPlugin() // 热加载插件
     ]
 }
