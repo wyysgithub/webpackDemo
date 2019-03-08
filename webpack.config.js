@@ -3,10 +3,13 @@
 // const path = require('path');
 const webpack = require('webpack');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: __dirname + '/app/main.js',
     output: {
-        path: __dirname + "/public",
+        // path: __dirname + "/public",
+        path: __dirname + "/build",
         filename: "bundle.js"
     },
 
@@ -91,9 +94,16 @@ module.exports = {
 
 
     /**
+     *  webpack.BannerPlugin  自带插件
+     *
+     *  npm install --save-dev html-webpack-plugin
+     *  依据一个简单的index.html模板，生成一个自动引用你打包后的JS文件的新index.html。
      *
      */
     plugins: [
-        new webpack.BannerPlugin("版权所有 WangYangYang") // 打包出的js首行注释版权信息
+        new webpack.BannerPlugin("版权所有 WangYangYang"), // 打包出的js首行注释版权信息
+        new HtmlWebpackPlugin({
+            template:__dirname+"/app/index.tmpl.html"  //new 示例并传入参数
+        })
     ]
 }
